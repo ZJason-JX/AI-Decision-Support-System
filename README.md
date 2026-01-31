@@ -23,20 +23,18 @@ This project explores how AI can **support**, rather than replace, human decisio
 - Clear human-in-the-loop confirmation
 - Post-decision evaluation mechanisms
 
-This MVP focuses on **decision quality**, not model performance.
-
 ---
 
 ## Target Users & Scenarios
 
 ### Target Users
-- Operational decision-makers
-- Risk managers
-- On-call managers in time-critical systems
+- Operational decision-makers（Leader in Government,ralated to the issues）
+- Risk managers(Like system APP supplier)
+- On-call managers in time-critical systems(Such as City Water system management department)
 
 ### Decision Scenarios
-- High uncertainty
-- Time-sensitive
+- High uncertainty(Need AI provide mutiple choices)
+- Time-sensitive(Short time required,it's hard to people)
 - Asymmetric risk (mistakes are far more costly than inaction)
 
 > The current case study is based on **urban infrastructure risk management**,  
@@ -48,9 +46,9 @@ This MVP focuses on **decision quality**, not model performance.
 
 The product aims to answer three core questions:
 
-1. **Can AI help humans make better decisions under pressure?**
-2. **Where should AI stop, and human responsibility begin?**
-3. **How do we measure whether AI-assisted decisions actually improve outcomes?**
+1. **Can AI help humans make better decisions under pressure?**(As an assistant)
+2. **Where should AI stop, and human responsibility begin?**(AI boundary)
+3. **How do we measure whether AI-assisted decisions actually improve outcomes?**(Data is our standard)
 
 ---
 
@@ -71,12 +69,12 @@ Enable decision-makers to quickly understand *why* attention is required.
 ### 2. AI-Generated Recommendations
 
 Instead of a single “correct answer”, the system provides:
-- Multiple decision options (Option A / B / C)
-- Expected outcomes
-- Associated risks and uncertainty
+- Multiple decision options (Option A / B / C --> People make final decision)
+- Expected outcomes (Exactly helpful)
+- Associated risks and uncertainty (Explain the limitations)
 
 **Design Principle:**  
-AI proposes — humans decide.
+AI proposes — humans decide. (Clear ability boundary)
 
 ---
 
@@ -94,7 +92,7 @@ Prevent blind trust in AI and ensure accountability.
 ### 4. Post-Decision Review
 
 After outcomes are observed:
-- Compare AI recommendation vs. human decision
+- Compare AI recommendation vs. human decision 
 - Analyze decision effectiveness
 - Identify patterns of AI overconfidence or underuse
 
@@ -107,7 +105,7 @@ This module connects directly to the **Decision Quality Analytics Platform** (Pr
 | AI Handles | Humans Handle |
 |-----------|---------------|
 | Risk estimation | Final decision |
-| Option generation | Ethical & legal responsibility |
+| Option generation | Ethical & legal responsibility (Maybe we can insert legal document to support AI make this) |
 | Pattern recognition | Contextual judgment |
 | Historical learning | Exception handling |
 
