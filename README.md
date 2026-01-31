@@ -1,5 +1,156 @@
-# AI-Decision-Support-System
-### For high-risk, time-sensitive operational scenarios
+# AI Decision Support System (MVP)
 
-A product that helps decision-makers translate AI predictions into actionable decisions,
-with clear responsibility boundaries between humans and AI.
+An AI-powered decision support product designed for **high-risk, time-sensitive scenarios**,  
+where AI predictions must be translated into **responsible, human-approved decisions**.
+
+---
+
+## Overview
+
+As AI models become increasingly capable of prediction, a critical gap emerges in real-world applications:
+
+> **Predictions alone do not create value — decisions do.**
+
+In many high-stakes operational scenarios, decision-makers face:
+- High uncertainty
+- Severe consequences of mistakes
+- Limited time for response
+- Legal or organizational responsibility that **cannot be delegated to AI**
+
+This project explores how AI can **support**, rather than replace, human decision-making by providing:
+- Interpretable risk assessments
+- Actionable recommendations
+- Clear human-in-the-loop confirmation
+- Post-decision evaluation mechanisms
+
+This MVP focuses on **decision quality**, not model performance.
+
+---
+
+## Target Users & Scenarios
+
+### Target Users
+- Operational decision-makers
+- Risk managers
+- On-call managers in time-critical systems
+
+### Decision Scenarios
+- High uncertainty
+- Time-sensitive
+- Asymmetric risk (mistakes are far more costly than inaction)
+
+> The current case study is based on **urban infrastructure risk management**,  
+> but the decision framework is designed to be **industry-agnostic**.
+
+---
+
+## Product Goals
+
+The product aims to answer three core questions:
+
+1. **Can AI help humans make better decisions under pressure?**
+2. **Where should AI stop, and human responsibility begin?**
+3. **How do we measure whether AI-assisted decisions actually improve outcomes?**
+
+---
+
+## Product Design
+
+### 1. Risk Overview
+
+Provides a high-level view of current risk conditions:
+- Risk level classification
+- Trend over time
+- AI confidence and explanation
+
+**Goal:**  
+Enable decision-makers to quickly understand *why* attention is required.
+
+---
+
+### 2. AI-Generated Recommendations
+
+Instead of a single “correct answer”, the system provides:
+- Multiple decision options (Option A / B / C)
+- Expected outcomes
+- Associated risks and uncertainty
+
+**Design Principle:**  
+AI proposes — humans decide.
+
+---
+
+### 3. Human Confirmation & Responsibility
+
+Before execution:
+- Humans select or modify AI recommendations
+- All decisions are logged with timestamps and ownership
+
+**Goal:**  
+Prevent blind trust in AI and ensure accountability.
+
+---
+
+### 4. Post-Decision Review
+
+After outcomes are observed:
+- Compare AI recommendation vs. human decision
+- Analyze decision effectiveness
+- Identify patterns of AI overconfidence or underuse
+
+This module connects directly to the **Decision Quality Analytics Platform** (Project C).
+
+---
+
+## AI Capability Boundary
+
+| AI Handles | Humans Handle |
+|-----------|---------------|
+| Risk estimation | Final decision |
+| Option generation | Ethical & legal responsibility |
+| Pattern recognition | Contextual judgment |
+| Historical learning | Exception handling |
+
+This boundary is a **deliberate product choice**, not a technical limitation.
+
+---
+
+## MVP Scope
+
+### Included in MVP
+- Decision workflow design
+- AI recommendation logic (conceptual / mock)
+- Human-in-the-loop interaction
+- Decision logging and evaluation framework
+
+### Not Included
+- Fully automated execution
+- Real-time production deployment
+- Model optimization at scale
+
+---
+
+## Demo & Artifacts
+
+- Product Requirement Document (PRD)
+- User journey and decision flow
+- Low-fidelity prototype (Figma / PDF)
+- Sample decision records and analytics
+
+---
+
+## Why This Product Matters
+
+This project demonstrates how AI products can:
+- Create value **beyond model accuracy**
+- Reduce operational risk
+- Build trust between humans and AI systems
+
+It is intended as a **product thinking exercise**, not a production system.
+
+---
+
+## Author
+
+Designed and documented by an aspiring AI Product Manager  
+with experience in complex real-world operational systems.
