@@ -1,0 +1,303 @@
+import { AlertTriangle, TrendingUp, Lightbulb, CheckCircle, BarChart3, ArrowRight, Camera } from 'lucide-react';
+import { useState } from 'react';
+
+export default function App() {
+  const [screenshotMode, setScreenshotMode] = useState(false);
+
+  const handleScreenshotMode = () => {
+    setScreenshotMode(true);
+    // Scroll to top to show full content
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    
+    // Show instructions
+    setTimeout(() => {
+      const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+      const instructions = isMac 
+        ? '按 Cmd + Shift + 4 进行截图，拖动选择整个内容区域'
+        : '按 Win + Shift + S 进行截图，选择矩形区域截取整个内容';
+      alert(instructions);
+    }, 500);
+  };
+
+  const exitScreenshotMode = () => {
+    setScreenshotMode(false);
+  };
+
+  return (
+    <div className={`min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 ${screenshotMode ? 'p-2' : 'p-8'}`}>
+      <div className={`mx-auto ${screenshotMode ? 'max-w-6xl' : 'max-w-7xl'}`}>
+        {/* Screenshot Mode Button */}
+        {!screenshotMode && (
+          <div className="flex justify-end mb-4">
+            <button
+              onClick={handleScreenshotMode}
+              className="flex items-center gap-2 bg-slate-900 text-white px-4 py-2 rounded-lg hover:bg-slate-800 transition-colors shadow-lg"
+            >
+              <Camera className="w-4 h-4" />
+              准备截图模式
+            </button>
+          </div>
+        )}
+
+        {/* Exit Screenshot Mode */}
+        {screenshotMode && (
+          <div className="flex justify-center mb-1">
+            <button
+              onClick={exitScreenshotMode}
+              className="text-xs bg-red-600 text-white px-2 py-1 rounded hover:bg-red-700 transition-colors"
+            >
+              退出截图模式
+            </button>
+          </div>
+        )}
+
+        {/* Workflow Content */}
+        <div className={screenshotMode ? 'screenshot-mode' : ''} style={screenshotMode ? { transform: 'scale(0.67)', transformOrigin: 'top center' } : {}}>
+          {/* Header */}
+          <div className={`text-center ${screenshotMode ? 'mb-2' : 'mb-12'}`}>
+            <h1 className={`font-bold text-slate-900 ${screenshotMode ? 'text-xl mb-1' : 'text-4xl mb-2'}`}>
+              AI-Assisted Decision Workflow (Human-in-the-loop)
+            </h1>
+            <p className={`text-slate-600 ${screenshotMode ? 'text-xs' : ''}`}>人机协作决策流程</p>
+          </div>
+
+          {/* Workflow Container */}
+          <div className="relative">
+            {/* Connection Lines */}
+            <div 
+              className="absolute top-24 left-0 right-0 h-1 bg-gradient-to-r from-red-200 via-blue-200 to-green-200 hidden lg:block" 
+              style={{ top: screenshotMode ? '50px' : '120px' }} 
+            />
+
+            {/* Workflow Nodes */}
+            <div className={`grid grid-cols-1 lg:grid-cols-5 ${screenshotMode ? 'gap-1.5' : 'gap-6'} relative`}>
+              {/* Node 1: Risk Signal */}
+              <WorkflowNode
+                icon={<AlertTriangle className="w-8 h-8" />}
+                iconColor="text-red-600"
+                bgColor="bg-red-50"
+                borderColor="border-red-200"
+                number="1"
+                title="Risk Signal Triggered"
+                titleCn="风险信号触发"
+                description="External data or system signals indicate elevated risk"
+                descriptionCn="外部数据或系统信号表明风险升高"
+                details="(e.g. weather, system metrics, anomaly detection)"
+                detailsCn="（例如：天气、系统指标、异常检测）"
+              />
+
+              <ArrowConnector />
+
+              {/* Node 2: Risk Overview */}
+              <WorkflowNode
+                icon={<TrendingUp className="w-8 h-8" />}
+                iconColor="text-orange-600"
+                bgColor="bg-orange-50"
+                borderColor="border-orange-200"
+                number="2"
+                title="Risk Overview"
+                titleCn="风险概览"
+                description="• Risk level & trend"
+                descriptionCn="• 风险等级与趋势"
+                details="• Key contributing factors"
+                detailsCn="• 关键影响因素"
+                extraDetails="• AI confidence & explanation"
+                extraDetailsCn="• AI 置信度与解释"
+                designNote="Designed for fast situational awareness under time pressure."
+                designNoteCn="为时间压力下的快速态势感知而设计"
+              />
+
+              <ArrowConnector />
+
+              {/* Node 3: AI Recommendation */}
+              <WorkflowNode
+                icon={<Lightbulb className="w-8 h-8" />}
+                iconColor="text-blue-600"
+                bgColor="bg-blue-50"
+                borderColor="border-blue-200"
+                number="3"
+                title="AI-Generated Recommendations"
+                titleCn="AI 生成建议"
+                description="• Option A / B / C"
+                descriptionCn="• 方案 A / B / C"
+                details="• Expected outcome"
+                detailsCn="• 预期结果"
+                extraDetails="• Risk & uncertainty"
+                extraDetailsCn="• 风险与不确定性"
+                designNote="AI provides options, not decisions."
+                designNoteCn="AI 提供选项，而非决策"
+                isImportant={true}
+              />
+
+              <ArrowConnector />
+
+              {/* Node 4: Human Decision */}
+              <WorkflowNode
+                icon={<CheckCircle className="w-8 h-8" />}
+                iconColor="text-purple-600"
+                bgColor="bg-purple-50"
+                borderColor="border-purple-200"
+                number="4"
+                title="Human Confirmation & Decision"
+                titleCn="人类确认与决策"
+                description="• Accept / modify AI suggestion"
+                descriptionCn="• 接受 / 修改 AI 建议"
+                details="• Add contextual judgment"
+                detailsCn="• 添加情境判断"
+                extraDetails="• Decision ownership"
+                extraDetailsCn="• 决策责任归属"
+                designNote="Responsibility remains with humans."
+                designNoteCn="责任始终由人类承担"
+                isImportant={true}
+                isCritical={true}
+              />
+
+              <ArrowConnector />
+
+              {/* Node 5: Outcome & Review */}
+              <WorkflowNode
+                icon={<BarChart3 className="w-8 h-8" />}
+                iconColor="text-green-600"
+                bgColor="bg-green-50"
+                borderColor="border-green-200"
+                number="5"
+                title="Outcome & Post-Decision Review"
+                titleCn="结果与决策后复盘"
+                description="• Actual outcome"
+                descriptionCn="• 实际结果"
+                details="• Decision effectiveness"
+                detailsCn="• 决策有效性"
+                extraDetails="• Feedback into analytics"
+                extraDetailsCn="• 反馈至分析系统"
+              />
+            </div>
+          </div>
+
+          {/* Footer Notes */}
+          <div className={`bg-white rounded-lg border-2 border-slate-200 shadow-sm ${screenshotMode ? 'mt-4 p-3' : 'mt-12 p-6'}`}>
+            <h3 className={`font-semibold text-slate-900 ${screenshotMode ? 'mb-2 text-sm' : 'mb-3'}`}>核心设计原则 (Core Design Principles)</h3>
+            <div className={`grid md:grid-cols-2 gap-4 text-slate-700 ${screenshotMode ? 'text-xs' : 'text-sm'}`}>
+              <div className="flex items-start gap-2">
+                <span className="text-blue-600 mt-1">•</span>
+                <span><strong>AI as Advisor:</strong> AI 提供选项和分析，而非做出最终决策</span>
+              </div>
+              <div className="flex items-start gap-2">
+                <span className="text-purple-600 mt-1">•</span>
+                <span><strong>Human Authority:</strong> 人类保留最终决策权和责任</span>
+              </div>
+              <div className="flex items-start gap-2">
+                <span className="text-orange-600 mt-1">•</span>
+                <span><strong>Time-Critical Design:</strong> 为高压环境下的快速决策优化</span>
+              </div>
+              <div className="flex items-start gap-2">
+                <span className="text-green-600 mt-1">•</span>
+                <span><strong>Continuous Learning:</strong> 通过反馈循环持续改进</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+interface WorkflowNodeProps {
+  icon: React.ReactNode;
+  iconColor: string;
+  bgColor: string;
+  borderColor: string;
+  number: string;
+  title: string;
+  titleCn: string;
+  description: string;
+  descriptionCn: string;
+  details?: string;
+  detailsCn?: string;
+  extraDetails?: string;
+  extraDetailsCn?: string;
+  designNote?: string;
+  designNoteCn?: string;
+  isImportant?: boolean;
+  isCritical?: boolean;
+  screenshotMode?: boolean;
+}
+
+function WorkflowNode({
+  icon,
+  iconColor,
+  bgColor,
+  borderColor,
+  number,
+  title,
+  titleCn,
+  description,
+  descriptionCn,
+  details,
+  detailsCn,
+  extraDetails,
+  extraDetailsCn,
+  designNote,
+  designNoteCn,
+  isImportant,
+  isCritical
+}: WorkflowNodeProps) {
+  return (
+    <div className="relative">
+      <div className={`bg-white rounded-xl p-6 border-2 ${borderColor} shadow-lg hover:shadow-xl transition-shadow h-full flex flex-col`}>
+        {/* Number Badge */}
+        <div className={`absolute -top-3 -left-3 w-8 h-8 ${bgColor} ${borderColor} border-2 rounded-full flex items-center justify-center font-bold text-sm ${iconColor}`}>
+          {number}
+        </div>
+
+        {/* Icon */}
+        <div className={`${bgColor} w-16 h-16 rounded-lg flex items-center justify-center mb-4 ${iconColor}`}>
+          {icon}
+        </div>
+
+        {/* Title */}
+        <h3 className="font-bold text-lg text-slate-900 mb-1">{title}</h3>
+        <p className="text-sm text-slate-600 mb-4">{titleCn}</p>
+
+        {/* Description */}
+        <div className="text-sm text-slate-700 space-y-1 flex-grow">
+          <p>{description}</p>
+          <p className="text-xs text-slate-500">{descriptionCn}</p>
+          
+          {details && (
+            <>
+              <p className="mt-2">{details}</p>
+              <p className="text-xs text-slate-500">{detailsCn}</p>
+            </>
+          )}
+          
+          {extraDetails && (
+            <>
+              <p className="mt-2">{extraDetails}</p>
+              <p className="text-xs text-slate-500">{extraDetailsCn}</p>
+            </>
+          )}
+        </div>
+
+        {/* Design Note */}
+        {designNote && (
+          <div className={`mt-4 pt-4 border-t-2 ${borderColor}`}>
+            <p className={`text-xs font-semibold ${isImportant ? 'text-slate-900' : 'text-slate-700'} ${isCritical ? 'text-purple-900' : ''}`}>
+              {isCritical && '⭐ '}
+              {isImportant && !isCritical && '💡 '}
+              PM 视角：{designNote}
+            </p>
+            <p className="text-xs text-slate-500 mt-1">{designNoteCn}</p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function ArrowConnector() {
+  return (
+    <div className="hidden lg:flex items-center justify-center">
+      <ArrowRight className="w-8 h-8 text-slate-400" />
+    </div>
+  );
+}
